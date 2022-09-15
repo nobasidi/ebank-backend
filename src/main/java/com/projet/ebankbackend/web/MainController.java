@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projet.ebankbackend.dtos.AccountDto;
 import com.projet.ebankbackend.dtos.ActiveAccountDto;
 import com.projet.ebankbackend.dtos.ClientAccountDto;
+import com.projet.ebankbackend.dtos.ClientDto;
 import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.dtos.CreateAccountDto;
@@ -64,5 +65,11 @@ public class MainController
                                     @RequestBody ActiveAccountDto info) throws EntityNotFoundException
     {
         return bs.activeAccount(account, info);
+    }
+
+    @GetMapping("/clients")
+    public List<ClientDto>  getAllClients()
+    {
+        return cs.getAllClients();
     }
 }

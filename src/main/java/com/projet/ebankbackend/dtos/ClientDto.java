@@ -7,8 +7,6 @@ import lombok.Data;
 @Data
 public class ClientDto 
 {
-  
-    //private String code;
     
     private String nom;
 
@@ -21,5 +19,4 @@ public class ClientDto
     private String email;
 
     private String telephone;
-
 }

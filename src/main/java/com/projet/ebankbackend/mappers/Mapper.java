@@ -1,9 +1,11 @@
 package com.projet.ebankbackend.mappers;
 
 import com.projet.ebankbackend.dtos.AccountDto;
+import com.projet.ebankbackend.dtos.ClientDto;
 import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.entities.Account;
+import com.projet.ebankbackend.entities.Client;
 import com.projet.ebankbackend.entities.Operations;
 
 public class Mapper 
@@ -39,6 +41,18 @@ public class Mapper
         operationdto.setNumoperation(operation.getCodeop());
         operationdto.setMontant(operation.getAmount());
         return operationdto;
+    }
+
+    public static ClientDto clientDto(Client client)
+    {
+        ClientDto clientdto=new ClientDto();
+        clientdto.setNom(client.getNom());
+        clientdto.setPrenom(client.getPrenom());
+        clientdto.setAdresse(client.getAdresse());
+        clientdto.setDatenaiss(client.getDatenaiss());
+        clientdto.setEmail(client.getEmail());
+        clientdto.setTelephone(client.getTelephone());
+        return clientdto;
     }
 
 

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.projet.ebankbackend.dtos.ClientAccountDto;
+import com.projet.ebankbackend.dtos.ClientDto;
 import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.dtos.VirementDto;
@@ -17,4 +18,5 @@ public interface ClientServices
     List<ClientAccountDto> getAccount(String codeclient);
     Collection<List<ClientOperationDto>> getOperation(String codeClient);
     ClientVirementDto makeOperation(VirementDto info) throws OperationImpossibleException, AccountNotActivateException, EntityNotFoundException;
+    List<ClientDto> getAllClients();
 }

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.projet.ebankbackend.dtos.ClientAccountDto;
+import com.projet.ebankbackend.dtos.ClientDto;
 import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.dtos.VirementDto;
@@ -73,6 +74,16 @@ public class ClientServicesImpl implements ClientServices
     {
         ClientVirementDto operation=bs.virement(info);
         return operation;
+    }
+
+    @Override
+    public List<ClientDto> getAllClients() {
+        
+        List<ClientDto> clients=cr.findAll()
+                                   .stream()
+                                   .map(Mapper::clientDto)
+                                   .collect(Collectors.toList());
+        return clients;                           
     }
 
 }
