@@ -1,25 +1,25 @@
 package com.projet.ebankbackend.services;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class ClientServicesImplTest {
     @Test
+    @Disabled
     void testGetAccount() 
     {
-        String totest="sidiba";
-        String totest1="omarba";
-        assertNotEquals(totest, totest1);
+        //soon
     }
 
     @Test
+    @Disabled
     void testGetAllClients() 
     {
         //soon
     }
 
     @Test
+    @Disabled
     void testGetOperation() 
     {
         //soon
