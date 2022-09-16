@@ -1,6 +1,7 @@
 package com.projet.ebankbackend.mappers;
 
 import com.projet.ebankbackend.dtos.AccountDto;
+import com.projet.ebankbackend.dtos.ClientAccountDto;
 import com.projet.ebankbackend.dtos.ClientDto;
 import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
@@ -18,6 +19,14 @@ public class Mapper
         virementdto.setDate(operation.getDateop());
         virementdto.setMontant(operation.getAmount());
         return virementdto;
+    }
+
+    public static ClientAccountDto clientAccountToDto(Account account)
+    {
+        ClientAccountDto clientaccountdto=new ClientAccountDto();
+        clientaccountdto.setDatecreation(account.getCreatedat());
+        clientaccountdto.setNumaccount(account.getNumcount());
+        return clientaccountdto;
     }
 
     public static AccountDto accountToDto(Account account)

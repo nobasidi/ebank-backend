@@ -12,7 +12,6 @@ import com.projet.ebankbackend.dtos.ClientDto;
 import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.dtos.VirementDto;
-//import com.projet.ebankbackend.dtos.OperationsDto;
 import com.projet.ebankbackend.entities.Account;
 import com.projet.ebankbackend.entities.Client;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
@@ -33,23 +32,15 @@ public class ClientServicesImpl implements ClientServices
     private BankServices bs;
 
     @Override
-    public List<ClientAccountDto> getAccount(String codeclient) {
+    public List<ClientAccountDto> getAccount(String codeclient) 
+    {
         
         Client client=cr.findByCode(codeclient);
         List<ClientAccountDto> info=client.getAccounts().stream()
-                                          .map(this::accountToDto)
+                                          .map(Mapper::clientAccountToDto)
                                           .collect(Collectors.toList());
         return info;                                  
     }
-
-    private ClientAccountDto accountToDto(Account account)
-    {
-        ClientAccountDto clientaccountdto=new ClientAccountDto();
-        clientaccountdto.setDatecreation(account.getCreatedat());
-        clientaccountdto.setNumaccount(account.getNumcount());
-        return clientaccountdto;
-    }
-
 
 
     @Override
