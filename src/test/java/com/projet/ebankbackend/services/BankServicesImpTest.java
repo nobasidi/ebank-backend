@@ -8,13 +8,13 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.projet.ebankbackend.dtos.ActiveAccountDto;
 import com.projet.ebankbackend.dtos.SimpleOperationDto;
 import com.projet.ebankbackend.entities.Account;
 import com.projet.ebankbackend.entities.Client;
@@ -22,6 +22,7 @@ import com.projet.ebankbackend.entities.CurrentAccount;
 import com.projet.ebankbackend.entities.Operations;
 import com.projet.ebankbackend.entities.SavingAccount;
 import com.projet.ebankbackend.enums.AccountStatus;
+import com.projet.ebankbackend.exceptions.AccountAlreadyActivateException;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
 import com.projet.ebankbackend.exceptions.EntityNotFoundException;
 import com.projet.ebankbackend.exceptions.OperationImpossibleException;
@@ -270,9 +271,24 @@ public class BankServicesImpTest
 
 
     @Test
-    @Disabled
-    void testVirement() 
+    void throwAccountAlreadyActivateExceptionWhenTryToActivateAnActivatedAccount() 
     {
+        CurrentAccount account=new CurrentAccount();
+        account.setNumcount("moncompte");
+        account.setClient(new Client());
+        account.setDecouvert(200000.00);
+        account.setDevise("devise");
+        account.setStatus(AccountStatus.ACTIVATED);
+        account.setSolde(0.00);
 
+        doAnswer(invocation->{
+            return account;
+        }).when(ar).findByNumcount("moncompte");
+
+        assertThrows(AccountAlreadyActivateException.class, ()->{
+                services.activeAccount("moncompte", new ActiveAccountDto());
+        });
+
+        verify(ar, never()).save(any());
     }
 }

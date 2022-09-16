@@ -13,7 +13,6 @@ import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.dtos.CreateAccountDto;
 import com.projet.ebankbackend.dtos.SimpleOperationDto;
 import com.projet.ebankbackend.dtos.VirementDto;
-//import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.entities.Account;
 import com.projet.ebankbackend.entities.Client;
 import com.projet.ebankbackend.entities.CurrentAccount;
@@ -21,6 +20,7 @@ import com.projet.ebankbackend.entities.Operations;
 import com.projet.ebankbackend.entities.SavingAccount;
 import com.projet.ebankbackend.enums.AccountStatus;
 import com.projet.ebankbackend.enums.OperationType;
+import com.projet.ebankbackend.exceptions.AccountAlreadyActivateException;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
 import com.projet.ebankbackend.exceptions.EntityNotFoundException;
 import com.projet.ebankbackend.exceptions.ErrorCodes;
@@ -30,7 +30,7 @@ import com.projet.ebankbackend.repository.AccountRepository;
 import com.projet.ebankbackend.repository.ClientRepository;
 import com.projet.ebankbackend.repository.OperationsRepository;
 import lombok.AllArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+
 
 
 @Service
@@ -171,7 +171,7 @@ public class BankServicesImp implements BankServices
 
 
     @Override
-    public AccountDto activeAccount(String numaccount, ActiveAccountDto info) throws EntityNotFoundException 
+    public AccountDto activeAccount(String numaccount, ActiveAccountDto info) throws EntityNotFoundException, AccountAlreadyActivateException 
     {
        
         Account account=ar.findByNumcount(numaccount);
@@ -180,8 +180,9 @@ public class BankServicesImp implements BankServices
                                                 ErrorCodes.ACCOUNT_NOT_FOUND);
         
         if(account.getStatus()==AccountStatus.ACTIVATED)
-            //handle account already activate exception  
-            ;                                    
+            throw new AccountAlreadyActivateException("Votre compte est deja active", 
+                                                        ErrorCodes.ACCOUNT_ALREADY_ACTIVATE);
+                                           
         AccountDto active;
         account.setSolde(info.getSolde());
         account.setStatus(AccountStatus.ACTIVATED);

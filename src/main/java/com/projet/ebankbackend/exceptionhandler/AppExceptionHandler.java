@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import com.projet.ebankbackend.exceptions.AccountAlreadyActivateException;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
 import com.projet.ebankbackend.exceptions.EntityAlreadyExistException;
 import com.projet.ebankbackend.exceptions.EntityNotFoundException;
@@ -41,5 +42,12 @@ public class AppExceptionHandler
     public ExceptionDto handle(OperationImpossibleException exception, WebRequest request)
     {
         return new ExceptionDto(exception.getCode(), exception.getMessage());
+    }
+
+    @ExceptionHandler(AccountAlreadyActivateException.class)
+    @ResponseStatus(value=HttpStatus.CONFLICT)
+    public ExceptionDto handle(AccountAlreadyActivateException exception, WebRequest request)
+    {
+        return new ExceptionDto(exception.getErrorcode(), exception.getMessage());
     }
 }

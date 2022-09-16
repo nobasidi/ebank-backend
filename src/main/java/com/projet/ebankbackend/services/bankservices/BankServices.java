@@ -11,6 +11,7 @@ import com.projet.ebankbackend.dtos.VirementDto;
 import com.projet.ebankbackend.entities.Account;
 import com.projet.ebankbackend.entities.Operations;
 import com.projet.ebankbackend.enums.OperationType;
+import com.projet.ebankbackend.exceptions.AccountAlreadyActivateException;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
 import com.projet.ebankbackend.exceptions.EntityAlreadyExistException;
 import com.projet.ebankbackend.exceptions.EntityNotFoundException;
@@ -29,6 +30,6 @@ public interface BankServices
 
     AccountDto createAccount(CreateAccountDto info) throws EntityNotFoundException;
 
-    AccountDto activeAccount(String numaccount, ActiveAccountDto info)throws EntityNotFoundException;
+    AccountDto activeAccount(String numaccount, ActiveAccountDto info)throws EntityNotFoundException, AccountAlreadyActivateException;
 }
      

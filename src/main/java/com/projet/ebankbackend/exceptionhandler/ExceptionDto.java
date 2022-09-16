@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public class ExceptionDto 
 {
-    private final ErrorCodes code;
-    private final String message;
+    private  ErrorCodes code;
+    private  String message;
     private  Throwable cause;
 
     public ExceptionDto(ErrorCodes code, String message)

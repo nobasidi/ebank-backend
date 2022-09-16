@@ -19,6 +19,7 @@ import com.projet.ebankbackend.dtos.ClientOperationDto;
 import com.projet.ebankbackend.dtos.ClientVirementDto;
 import com.projet.ebankbackend.dtos.CreateAccountDto;
 import com.projet.ebankbackend.dtos.VirementDto;
+import com.projet.ebankbackend.exceptions.AccountAlreadyActivateException;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
 import com.projet.ebankbackend.exceptions.EntityNotFoundException;
 import com.projet.ebankbackend.exceptions.OperationImpossibleException;
@@ -62,7 +63,7 @@ public class MainController
     
     @PutMapping("accounts/activate/{account}")
     public AccountDto activeAccount(@PathVariable(name="account")String account,
-                                    @RequestBody ActiveAccountDto info) throws EntityNotFoundException
+                                    @RequestBody ActiveAccountDto info) throws EntityNotFoundException, AccountAlreadyActivateException
     {
         return bs.activeAccount(account, info);
     }
