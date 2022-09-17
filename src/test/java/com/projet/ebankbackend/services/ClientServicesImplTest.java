@@ -77,22 +77,24 @@ public class ClientServicesImplTest
         
         List<ClientAccountDto> rs=clientservice.getAccount("codeclient");
 
-        assertEquals(rs.get(1).getNumaccount(), account2.getNumcount());
-        assertEquals(rs.get(0).getNumaccount(), account1.getNumcount());
         
-        //modification de l ordre des assertions
+        assertEquals(rs.get(0).getNumaccount(), account1.getNumcount());
+        assertEquals(rs.get(1).getNumaccount(), account2.getNumcount());
+    
        
     }
 
     @Test
+    @Disabled
     void testGetOperation() 
     {
-        //ici ce sont mes tests 
+        
     }
 
     @Test
+    @Disabled
     void testMakeOperation() 
     {
-        //ici ce sont mes tests
+        
     }
 }
