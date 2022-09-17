@@ -77,10 +77,12 @@ public class ClientServicesImplTest
         
         List<ClientAccountDto> rs=clientservice.getAccount("codeclient");
 
+
         
         assertEquals(rs.get(0).getNumaccount(), account1.getNumcount());
         assertEquals(rs.get(1).getNumaccount(), account2.getNumcount());
     
+
        
     }
 
@@ -88,13 +90,13 @@ public class ClientServicesImplTest
     @Disabled
     void testGetOperation() 
     {
-        
+        //S il vous qui doit rediger ce teste?????
     }
 
     @Test
     @Disabled
     void testMakeOperation() 
     {
-        
+        //Et ce teste aussi on a du retard
     }
 }
