@@ -84,15 +84,14 @@ public class ClientServicesImplTest
     }
 
     @Test
-    @Disabled
     void testGetOperation() 
     {
-        
+        //ici ce sont mes tests 
     }
 
     @Test
     void testMakeOperation() 
     {
-        
+        //ici ce sont mes tests
     }
 }
