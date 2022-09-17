@@ -15,8 +15,8 @@ import com.projet.ebankbackend.exceptions.OperationImpossibleException;
 
 public interface ClientServices 
 {
-    List<ClientAccountDto> getAccount(String codeclient);
-    Collection<List<ClientOperationDto>> getOperation(String codeClient);
+    List<ClientAccountDto> getAccount(String codeclient) throws EntityNotFoundException;
+    Collection<List<ClientOperationDto>> getOperation(String codeClient) throws EntityNotFoundException;
     ClientVirementDto makeOperation(VirementDto info) throws OperationImpossibleException, AccountNotActivateException, EntityNotFoundException;
     List<ClientDto> getAllClients();
 }

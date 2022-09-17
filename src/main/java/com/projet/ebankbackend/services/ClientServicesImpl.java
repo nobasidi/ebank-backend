@@ -16,6 +16,7 @@ import com.projet.ebankbackend.entities.Account;
 import com.projet.ebankbackend.entities.Client;
 import com.projet.ebankbackend.exceptions.AccountNotActivateException;
 import com.projet.ebankbackend.exceptions.EntityNotFoundException;
+import com.projet.ebankbackend.exceptions.ErrorCodes;
 import com.projet.ebankbackend.exceptions.OperationImpossibleException;
 import com.projet.ebankbackend.mappers.Mapper;
 import com.projet.ebankbackend.repository.ClientRepository;
@@ -32,10 +33,14 @@ public class ClientServicesImpl implements ClientServices
     private BankServices bs;
 
     @Override
-    public List<ClientAccountDto> getAccount(String codeclient) 
+    public List<ClientAccountDto> getAccount(String codeclient) throws EntityNotFoundException 
     {
         
         Client client=cr.findByCode(codeclient);
+        if (client==null)
+            throw new EntityNotFoundException("Le client specifie n existe pas", 
+                                                ErrorCodes.CLIENT_NOT_FOUND);
+        
         List<ClientAccountDto> info=client.getAccounts().stream()
                                           .map(Mapper::clientAccountToDto)
                                           .collect(Collectors.toList());
@@ -44,10 +49,15 @@ public class ClientServicesImpl implements ClientServices
 
 
     @Override
-    public Collection<List<ClientOperationDto>> getOperation(String codeclient) 
-    {
+    public Collection<List<ClientOperationDto>> getOperation(String codeclient) throws EntityNotFoundException 
+    {   
         Collection<List<ClientOperationDto>> info=new ArrayList<>();
-        Collection<Account> accounts=cr.findByCode(codeclient).getAccounts();
+        Client client=cr.findByCode(codeclient);
+        if(client==null) 
+            throw new EntityNotFoundException("Le client specifie n existe pas", 
+                                                    ErrorCodes.CLIENT_NOT_FOUND);
+                                                    
+        Collection<Account> accounts=client.getAccounts();
         accounts.forEach(account->{
             if(account.getOperations().isEmpty())
                 return;

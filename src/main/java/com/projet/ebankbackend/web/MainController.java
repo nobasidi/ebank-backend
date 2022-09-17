@@ -36,14 +36,14 @@ public class MainController
     private BankServices bs;
 
     @GetMapping("/accounts/{client}")
-    public List<ClientAccountDto> getAccounts(@PathVariable(name="client") String codeclient)
+    public List<ClientAccountDto> getAccounts(@PathVariable(name="client") String codeclient) throws EntityNotFoundException
     {
         return cs.getAccount(codeclient);
     }
     
 
     @GetMapping("/operations/{client}")
-    public Collection<List<ClientOperationDto>> getOperations(@PathVariable(name="client") String codeclient)
+    public Collection<List<ClientOperationDto>> getOperations(@PathVariable(name="client") String codeclient) throws EntityNotFoundException
     {
         return cs.getOperation(codeclient);
     }
