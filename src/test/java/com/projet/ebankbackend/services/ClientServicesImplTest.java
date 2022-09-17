@@ -79,20 +79,18 @@ public class ClientServicesImplTest
 
         assertEquals(rs.get(1).getNumaccount(), account2.getNumcount());
         assertEquals(rs.get(0).getNumaccount(), account1.getNumcount());
-        
-        //modification de l ordre des assertions
        
     }
 
     @Test
     void testGetOperation() 
     {
-        //ici ce sont mes tests 
+        //S il vous qui doit rediger ce teste?????
     }
 
     @Test
     void testMakeOperation() 
     {
-        //ici ce sont mes tests
+        //Et ce teste aussi on a du retard
     }
 }
